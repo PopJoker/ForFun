@@ -7,7 +7,16 @@ $url = "https://webems.gustech.com.tw/"
 Start-Process -FilePath $chromePath -ArgumentList @("--start-maximized", "--incognito", $url)
 
 # 等待瀏覽器載入
-Start-Sleep -Seconds 5
+Start-Sleep -Seconds 10  # 增加等待時間
+
+# 抓取最新 Chrome 進程
+$proc = Get-Process chrome | Sort-Object StartTime -Descending | Select-Object -First 1
+
+# 嘗試多次強制前景
+for ($i = 0; $i -lt 5; $i++) {
+    [Win32]::SetForegroundWindow($proc.MainWindowHandle)
+    Start-Sleep -Milliseconds 500
+}
 
 # 自動填入帳號密碼 (用 SendKeys 模擬)
 Add-Type -AssemblyName System.Windows.Forms
