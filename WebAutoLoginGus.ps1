@@ -1,11 +1,10 @@
 # 等待系統穩定
 Start-Sleep -Seconds 10
 
-# Chrome 路徑
 $chromePath = "C:\Program Files\Google\Chrome\Application\chrome.exe"
+$url = "https://webems.gustech.com.tw/"
 
-# 使用 Chrome 開啟網址，無痕模式，全螢幕
-Start-Process -FilePath $chromePath -ArgumentList @("$url") -WindowStyle Normal
+Start-Process -FilePath $chromePath -ArgumentList @("--start-maximized", "--incognito", $url)
 
 # 等待瀏覽器載入
 Start-Sleep -Seconds 5
