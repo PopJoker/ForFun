@@ -5,12 +5,7 @@ Start-Sleep -Seconds 10
 $chromePath = "C:\Program Files\Google\Chrome\Application\chrome.exe"
 
 # 使用 Chrome 開啟網址，無痕模式，全螢幕
-Start-Process $chromePath -ArgumentList @(
-    "--profile-directory=Default",
-    "--incognito",
-    "--start-maximized",
-    "https://webems.gustech.com.tw/"
-)
+Start-Process -FilePath $chromePath -ArgumentList @("$url") -WindowStyle Normal
 
 # 等待瀏覽器載入
 Start-Sleep -Seconds 5
