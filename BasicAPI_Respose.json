@@ -1,0 +1,1020 @@
+{
+    "realtimeStats": {
+        "power": 0.84,
+        "soc": 98,
+        "voltage": 58.65,
+        "temperature": 20.3,
+        "soh": 99,
+        "solarPower": 1.302,
+        "gridPower": 0.003,
+        "loadPower": 0.009,
+        "remainingCapacityAH": 97.16,
+        "pcsMode": "備援模式",
+        "batteryBackupSOC": 0,
+        "model": "LES",
+        "name": "家用儲能櫃",
+        "weather_temp": 19.6,
+        "weather_humidity": 77,
+        "weather_desc": "晴，少雲",
+        "dataTimestamp": "2026-01-15T03:16:21.000Z"
+    },
+    "dailyEnergy": [
+        {
+            "date": "2026-01-15",
+            "chargeKWh": 2.343,
+            "dischargeKWh": 3.337
+        },
+        {
+            "date": "2026-01-14",
+            "chargeKWh": 1.115,
+            "dischargeKWh": 0.825
+        },
+        {
+            "date": "2026-01-13",
+            "chargeKWh": 1.581,
+            "dischargeKWh": 1.598
+        },
+        {
+            "date": "2026-01-12",
+            "chargeKWh": 1.047,
+            "dischargeKWh": 1
+        },
+        {
+            "date": "2026-01-11",
+            "chargeKWh": 1.239,
+            "dischargeKWh": 1.219
+        },
+        {
+            "date": "2026-01-10",
+            "chargeKWh": 1.102,
+            "dischargeKWh": 1.037
+        },
+        {
+            "date": "2026-01-09",
+            "chargeKWh": 1.128,
+            "dischargeKWh": 0.287
+        }
+    ],
+    "alarms": [
+        {
+            "level": "Alarm",
+            "content": "狀態異常：ASCDL（第2櫃）",
+            "created_at": "2026-01-13T06:54:44.000Z"
+        },
+        {
+            "level": "Alarm",
+            "content": "狀態異常：ASCDL（第1櫃）",
+            "created_at": "2026-01-13T06:54:44.000Z"
+        },
+        {
+            "level": "Alarm",
+            "content": "狀態異常：ASCD（第1櫃）",
+            "created_at": "2026-01-13T06:54:44.000Z"
+        },
+        {
+            "level": "Alarm",
+            "content": "欄位錯誤",
+            "created_at": "2026-01-06T07:41:26.000Z"
+        },
+        {
+            "level": "Alarm",
+            "content": "欄位錯誤",
+            "created_at": "2026-01-06T07:41:21.000Z"
+        }
+    ],
+    "income": {
+        "monthlyDischargeKWh": 22.409890803536864,
+        "monthlyTotal": 268.91868964244236,
+        "last7Days": [
+            {
+                "date": "2026-01-15",
+                "daily_income": 40.044000000000004
+            },
+            {
+                "date": "2026-01-14",
+                "daily_income": 9.899999999999999
+            },
+            {
+                "date": "2026-01-13",
+                "daily_income": 19.176000000000002
+            },
+            {
+                "date": "2026-01-12",
+                "daily_income": 12
+            },
+            {
+                "date": "2026-01-11",
+                "daily_income": 14.628
+            },
+            {
+                "date": "2026-01-10",
+                "daily_income": 12.443999999999999
+            },
+            {
+                "date": "2026-01-09",
+                "daily_income": 3.444
+            }
+        ]
+    },
+    "powerCurve": [
+        {
+            "timestamp": "2026-01-14T19:20:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T19:25:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T19:30:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T19:35:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T19:40:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T19:45:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T19:50:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T19:55:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T20:00:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T20:05:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T20:10:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T20:15:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T20:20:00Z",
+            "power": 0
+        },
+        {
+            "timestamp": "2026-01-14T20:25:00Z",
+            "power": 0
+        },
+        {
+            "timestamp": "2026-01-14T20:30:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T20:35:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T20:40:00Z",
+            "power": 0
+        },
+        {
+            "timestamp": "2026-01-14T20:45:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T20:50:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T20:55:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T21:00:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T21:05:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T21:10:00Z",
+            "power": 0
+        },
+        {
+            "timestamp": "2026-01-14T21:15:00Z",
+            "power": 0
+        },
+        {
+            "timestamp": "2026-01-14T21:20:00Z",
+            "power": 0
+        },
+        {
+            "timestamp": "2026-01-14T21:25:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T21:30:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T21:35:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T21:40:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T21:45:00Z",
+            "power": 0
+        },
+        {
+            "timestamp": "2026-01-14T21:50:00Z",
+            "power": 0
+        },
+        {
+            "timestamp": "2026-01-14T21:55:00Z",
+            "power": 0
+        },
+        {
+            "timestamp": "2026-01-14T22:00:00Z",
+            "power": 0
+        },
+        {
+            "timestamp": "2026-01-14T22:05:00Z",
+            "power": -0.1
+        },
+        {
+            "timestamp": "2026-01-14T22:10:00Z",
+            "power": -0.11
+        },
+        {
+            "timestamp": "2026-01-14T22:15:00Z",
+            "power": -0.11
+        },
+        {
+            "timestamp": "2026-01-14T22:20:00Z",
+            "power": -0.11
+        },
+        {
+            "timestamp": "2026-01-14T22:25:00Z",
+            "power": -0.28
+        },
+        {
+            "timestamp": "2026-01-14T22:30:00Z",
+            "power": -0.35
+        },
+        {
+            "timestamp": "2026-01-14T22:35:00Z",
+            "power": -0.35
+        },
+        {
+            "timestamp": "2026-01-14T22:40:00Z",
+            "power": -0.35
+        },
+        {
+            "timestamp": "2026-01-14T22:45:00Z",
+            "power": -0.35
+        },
+        {
+            "timestamp": "2026-01-14T22:50:00Z",
+            "power": -0.35
+        },
+        {
+            "timestamp": "2026-01-14T22:55:00Z",
+            "power": -0.34
+        },
+        {
+            "timestamp": "2026-01-14T23:00:00Z",
+            "power": -0.34
+        },
+        {
+            "timestamp": "2026-01-14T23:05:00Z",
+            "power": -0.34
+        },
+        {
+            "timestamp": "2026-01-14T23:10:00Z",
+            "power": -0.33
+        },
+        {
+            "timestamp": "2026-01-14T23:15:00Z",
+            "power": -0.33
+        },
+        {
+            "timestamp": "2026-01-14T23:20:00Z",
+            "power": -0.32
+        },
+        {
+            "timestamp": "2026-01-14T23:25:00Z",
+            "power": -0.32
+        },
+        {
+            "timestamp": "2026-01-14T23:30:00Z",
+            "power": -0.31
+        },
+        {
+            "timestamp": "2026-01-14T23:35:00Z",
+            "power": -0.31
+        },
+        {
+            "timestamp": "2026-01-14T23:40:00Z",
+            "power": -0.3
+        },
+        {
+            "timestamp": "2026-01-14T23:45:00Z",
+            "power": -0.27
+        },
+        {
+            "timestamp": "2026-01-14T23:50:00Z",
+            "power": -0.27
+        },
+        {
+            "timestamp": "2026-01-14T23:55:00Z",
+            "power": -0.24
+        },
+        {
+            "timestamp": "2026-01-15T00:00:00Z",
+            "power": -0.21
+        },
+        {
+            "timestamp": "2026-01-15T00:05:00Z",
+            "power": -0.17
+        },
+        {
+            "timestamp": "2026-01-15T00:10:00Z",
+            "power": -0.17
+        },
+        {
+            "timestamp": "2026-01-15T00:15:00Z",
+            "power": -0.16
+        },
+        {
+            "timestamp": "2026-01-15T00:20:00Z",
+            "power": -0.15
+        },
+        {
+            "timestamp": "2026-01-15T00:25:00Z",
+            "power": -0.15
+        },
+        {
+            "timestamp": "2026-01-15T00:30:00Z",
+            "power": -0.17
+        },
+        {
+            "timestamp": "2026-01-15T00:35:00Z",
+            "power": -0.16
+        },
+        {
+            "timestamp": "2026-01-15T00:40:00Z",
+            "power": -0.17
+        },
+        {
+            "timestamp": "2026-01-15T00:45:00Z",
+            "power": -0.17
+        },
+        {
+            "timestamp": "2026-01-15T00:50:00Z",
+            "power": -0.18
+        },
+        {
+            "timestamp": "2026-01-15T00:55:00Z",
+            "power": -0.18
+        },
+        {
+            "timestamp": "2026-01-15T01:00:00Z",
+            "power": -0.19
+        },
+        {
+            "timestamp": "2026-01-15T01:05:00Z",
+            "power": -0.19
+        },
+        {
+            "timestamp": "2026-01-15T01:10:00Z",
+            "power": -0.17
+        },
+        {
+            "timestamp": "2026-01-15T01:15:00Z",
+            "power": -0.17
+        },
+        {
+            "timestamp": "2026-01-15T01:20:00Z",
+            "power": -0.17
+        },
+        {
+            "timestamp": "2026-01-15T01:25:00Z",
+            "power": -0.16
+        },
+        {
+            "timestamp": "2026-01-15T01:30:00Z",
+            "power": -0.17
+        },
+        {
+            "timestamp": "2026-01-15T01:35:00Z",
+            "power": -0.15
+        },
+        {
+            "timestamp": "2026-01-15T01:40:00Z",
+            "power": -0.15
+        },
+        {
+            "timestamp": "2026-01-15T01:45:00Z",
+            "power": -0.15
+        },
+        {
+            "timestamp": "2026-01-15T01:50:00Z",
+            "power": -0.13
+        },
+        {
+            "timestamp": "2026-01-15T01:55:00Z",
+            "power": -0.12
+        },
+        {
+            "timestamp": "2026-01-15T02:00:00Z",
+            "power": -0.05
+        },
+        {
+            "timestamp": "2026-01-15T02:05:00Z",
+            "power": 0.38
+        },
+        {
+            "timestamp": "2026-01-15T02:10:00Z",
+            "power": 0.54
+        },
+        {
+            "timestamp": "2026-01-15T02:15:00Z",
+            "power": 0.69
+        },
+        {
+            "timestamp": "2026-01-15T02:20:00Z",
+            "power": 0.71
+        },
+        {
+            "timestamp": "2026-01-15T02:25:00Z",
+            "power": 0.73
+        },
+        {
+            "timestamp": "2026-01-15T02:30:00Z",
+            "power": 0.75
+        },
+        {
+            "timestamp": "2026-01-15T02:35:00Z",
+            "power": 0.78
+        },
+        {
+            "timestamp": "2026-01-15T02:40:00Z",
+            "power": 0.79
+        },
+        {
+            "timestamp": "2026-01-15T02:45:00Z",
+            "power": 0.79
+        },
+        {
+            "timestamp": "2026-01-15T02:50:00Z",
+            "power": 0.8
+        },
+        {
+            "timestamp": "2026-01-15T02:55:00Z",
+            "power": 0.81
+        },
+        {
+            "timestamp": "2026-01-15T03:00:00Z",
+            "power": 0.83
+        },
+        {
+            "timestamp": "2026-01-15T03:05:00Z",
+            "power": 0.85
+        },
+        {
+            "timestamp": "2026-01-15T03:10:00Z",
+            "power": 0.91
+        },
+        {
+            "timestamp": "2026-01-15T03:15:00Z",
+            "power": 0.85
+        },
+        {
+            "timestamp": "2026-01-15T03:16:22.847195725Z",
+            "power": 0.84
+        }
+    ]
+}
+{
+    "realtimeStats": {
+        "power": 0.84,                          //總功率
+        "soc": 98,                              //電量
+        "voltage": 58.65,                       //總電壓
+        "current":"CS.",                        //總電流
+        "temperature": 20.3,                    //系統溫度(6個最高)
+        "stats":"CS.",                          //運作狀態
+        "soh": 99,
+        "solarPower": 1.302,
+        "gridPower": 0.003,
+        "loadPower": 0.009,
+        "remainingCapacityAH": 97.16,           //剩餘容量
+        "pcsMode": "備援模式",
+        "batteryBackupSOC": 0,
+        "model": "LES",
+        "name": "家用儲能櫃",
+        "weather_temp": 19.6,
+        "weather_humidity": 77,
+        "weather_desc": "晴，少雲",
+        "dataTimestamp": "2026-01-15T03:16:21.000Z"
+    },
+    "dailyEnergy": [
+        {
+            "date": "2026-01-15",
+            "chargeKWh": 2.343,
+            "dischargeKWh": 3.337
+        },
+        {
+            "date": "2026-01-14",
+            "chargeKWh": 1.115,
+            "dischargeKWh": 0.825
+        },
+        {
+            "date": "2026-01-13",
+            "chargeKWh": 1.581,
+            "dischargeKWh": 1.598
+        },
+        {
+            "date": "2026-01-12",
+            "chargeKWh": 1.047,
+            "dischargeKWh": 1
+        },
+        {
+            "date": "2026-01-11",
+            "chargeKWh": 1.239,
+            "dischargeKWh": 1.219
+        },
+        {
+            "date": "2026-01-10",
+            "chargeKWh": 1.102,
+            "dischargeKWh": 1.037
+        },
+        {
+            "date": "2026-01-09",
+            "chargeKWh": 1.128,
+            "dischargeKWh": 0.287
+        }
+    ],
+    "alarms": [
+        {
+            "level": "Alarm",
+            "content": "狀態異常：ASCDL（第2櫃）",
+            "created_at": "2026-01-13T06:54:44.000Z"
+        },
+        {
+            "level": "Alarm",
+            "content": "狀態異常：ASCDL（第1櫃）",
+            "created_at": "2026-01-13T06:54:44.000Z"
+        },
+        {
+            "level": "Alarm",
+            "content": "狀態異常：ASCD（第1櫃）",
+            "created_at": "2026-01-13T06:54:44.000Z"
+        },
+        {
+            "level": "Alarm",
+            "content": "欄位錯誤",
+            "created_at": "2026-01-06T07:41:26.000Z"
+        },
+        {
+            "level": "Alarm",
+            "content": "欄位錯誤",
+            "created_at": "2026-01-06T07:41:21.000Z"
+        }
+    ],
+    "income": {
+        "monthlyDischargeKWh": 22.409890803536864,
+        "monthlyTotal": 268.91868964244236,
+        "last7Days": [
+            {
+                "date": "2026-01-15",
+                "daily_income": 40.044000000000004
+            },
+            {
+                "date": "2026-01-14",
+                "daily_income": 9.899999999999999
+            },
+            {
+                "date": "2026-01-13",
+                "daily_income": 19.176000000000002
+            },
+            {
+                "date": "2026-01-12",
+                "daily_income": 12
+            },
+            {
+                "date": "2026-01-11",
+                "daily_income": 14.628
+            },
+            {
+                "date": "2026-01-10",
+                "daily_income": 12.443999999999999
+            },
+            {
+                "date": "2026-01-09",
+                "daily_income": 3.444
+            }
+        ]
+    },
+    "powerCurve": [
+        {
+            "timestamp": "2026-01-14T19:20:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T19:25:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T19:30:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T19:35:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T19:40:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T19:45:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T19:50:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T19:55:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T20:00:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T20:05:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T20:10:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T20:15:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T20:20:00Z",
+            "power": 0
+        },
+        {
+            "timestamp": "2026-01-14T20:25:00Z",
+            "power": 0
+        },
+        {
+            "timestamp": "2026-01-14T20:30:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T20:35:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T20:40:00Z",
+            "power": 0
+        },
+        {
+            "timestamp": "2026-01-14T20:45:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T20:50:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T20:55:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T21:00:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T21:05:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T21:10:00Z",
+            "power": 0
+        },
+        {
+            "timestamp": "2026-01-14T21:15:00Z",
+            "power": 0
+        },
+        {
+            "timestamp": "2026-01-14T21:20:00Z",
+            "power": 0
+        },
+        {
+            "timestamp": "2026-01-14T21:25:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T21:30:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T21:35:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T21:40:00Z",
+            "power": 0.01
+        },
+        {
+            "timestamp": "2026-01-14T21:45:00Z",
+            "power": 0
+        },
+        {
+            "timestamp": "2026-01-14T21:50:00Z",
+            "power": 0
+        },
+        {
+            "timestamp": "2026-01-14T21:55:00Z",
+            "power": 0
+        },
+        {
+            "timestamp": "2026-01-14T22:00:00Z",
+            "power": 0
+        },
+        {
+            "timestamp": "2026-01-14T22:05:00Z",
+            "power": -0.1
+        },
+        {
+            "timestamp": "2026-01-14T22:10:00Z",
+            "power": -0.11
+        },
+        {
+            "timestamp": "2026-01-14T22:15:00Z",
+            "power": -0.11
+        },
+        {
+            "timestamp": "2026-01-14T22:20:00Z",
+            "power": -0.11
+        },
+        {
+            "timestamp": "2026-01-14T22:25:00Z",
+            "power": -0.28
+        },
+        {
+            "timestamp": "2026-01-14T22:30:00Z",
+            "power": -0.35
+        },
+        {
+            "timestamp": "2026-01-14T22:35:00Z",
+            "power": -0.35
+        },
+        {
+            "timestamp": "2026-01-14T22:40:00Z",
+            "power": -0.35
+        },
+        {
+            "timestamp": "2026-01-14T22:45:00Z",
+            "power": -0.35
+        },
+        {
+            "timestamp": "2026-01-14T22:50:00Z",
+            "power": -0.35
+        },
+        {
+            "timestamp": "2026-01-14T22:55:00Z",
+            "power": -0.34
+        },
+        {
+            "timestamp": "2026-01-14T23:00:00Z",
+            "power": -0.34
+        },
+        {
+            "timestamp": "2026-01-14T23:05:00Z",
+            "power": -0.34
+        },
+        {
+            "timestamp": "2026-01-14T23:10:00Z",
+            "power": -0.33
+        },
+        {
+            "timestamp": "2026-01-14T23:15:00Z",
+            "power": -0.33
+        },
+        {
+            "timestamp": "2026-01-14T23:20:00Z",
+            "power": -0.32
+        },
+        {
+            "timestamp": "2026-01-14T23:25:00Z",
+            "power": -0.32
+        },
+        {
+            "timestamp": "2026-01-14T23:30:00Z",
+            "power": -0.31
+        },
+        {
+            "timestamp": "2026-01-14T23:35:00Z",
+            "power": -0.31
+        },
+        {
+            "timestamp": "2026-01-14T23:40:00Z",
+            "power": -0.3
+        },
+        {
+            "timestamp": "2026-01-14T23:45:00Z",
+            "power": -0.27
+        },
+        {
+            "timestamp": "2026-01-14T23:50:00Z",
+            "power": -0.27
+        },
+        {
+            "timestamp": "2026-01-14T23:55:00Z",
+            "power": -0.24
+        },
+        {
+            "timestamp": "2026-01-15T00:00:00Z",
+            "power": -0.21
+        },
+        {
+            "timestamp": "2026-01-15T00:05:00Z",
+            "power": -0.17
+        },
+        {
+            "timestamp": "2026-01-15T00:10:00Z",
+            "power": -0.17
+        },
+        {
+            "timestamp": "2026-01-15T00:15:00Z",
+            "power": -0.16
+        },
+        {
+            "timestamp": "2026-01-15T00:20:00Z",
+            "power": -0.15
+        },
+        {
+            "timestamp": "2026-01-15T00:25:00Z",
+            "power": -0.15
+        },
+        {
+            "timestamp": "2026-01-15T00:30:00Z",
+            "power": -0.17
+        },
+        {
+            "timestamp": "2026-01-15T00:35:00Z",
+            "power": -0.16
+        },
+        {
+            "timestamp": "2026-01-15T00:40:00Z",
+            "power": -0.17
+        },
+        {
+            "timestamp": "2026-01-15T00:45:00Z",
+            "power": -0.17
+        },
+        {
+            "timestamp": "2026-01-15T00:50:00Z",
+            "power": -0.18
+        },
+        {
+            "timestamp": "2026-01-15T00:55:00Z",
+            "power": -0.18
+        },
+        {
+            "timestamp": "2026-01-15T01:00:00Z",
+            "power": -0.19
+        },
+        {
+            "timestamp": "2026-01-15T01:05:00Z",
+            "power": -0.19
+        },
+        {
+            "timestamp": "2026-01-15T01:10:00Z",
+            "power": -0.17
+        },
+        {
+            "timestamp": "2026-01-15T01:15:00Z",
+            "power": -0.17
+        },
+        {
+            "timestamp": "2026-01-15T01:20:00Z",
+            "power": -0.17
+        },
+        {
+            "timestamp": "2026-01-15T01:25:00Z",
+            "power": -0.16
+        },
+        {
+            "timestamp": "2026-01-15T01:30:00Z",
+            "power": -0.17
+        },
+        {
+            "timestamp": "2026-01-15T01:35:00Z",
+            "power": -0.15
+        },
+        {
+            "timestamp": "2026-01-15T01:40:00Z",
+            "power": -0.15
+        },
+        {
+            "timestamp": "2026-01-15T01:45:00Z",
+            "power": -0.15
+        },
+        {
+            "timestamp": "2026-01-15T01:50:00Z",
+            "power": -0.13
+        },
+        {
+            "timestamp": "2026-01-15T01:55:00Z",
+            "power": -0.12
+        },
+        {
+            "timestamp": "2026-01-15T02:00:00Z",
+            "power": -0.05
+        },
+        {
+            "timestamp": "2026-01-15T02:05:00Z",
+            "power": 0.38
+        },
+        {
+            "timestamp": "2026-01-15T02:10:00Z",
+            "power": 0.54
+        },
+        {
+            "timestamp": "2026-01-15T02:15:00Z",
+            "power": 0.69
+        },
+        {
+            "timestamp": "2026-01-15T02:20:00Z",
+            "power": 0.71
+        },
+        {
+            "timestamp": "2026-01-15T02:25:00Z",
+            "power": 0.73
+        },
+        {
+            "timestamp": "2026-01-15T02:30:00Z",
+            "power": 0.75
+        },
+        {
+            "timestamp": "2026-01-15T02:35:00Z",
+            "power": 0.78
+        },
+        {
+            "timestamp": "2026-01-15T02:40:00Z",
+            "power": 0.79
+        },
+        {
+            "timestamp": "2026-01-15T02:45:00Z",
+            "power": 0.79
+        },
+        {
+            "timestamp": "2026-01-15T02:50:00Z",
+            "power": 0.8
+        },
+        {
+            "timestamp": "2026-01-15T02:55:00Z",
+            "power": 0.81
+        },
+        {
+            "timestamp": "2026-01-15T03:00:00Z",
+            "power": 0.83
+        },
+        {
+            "timestamp": "2026-01-15T03:05:00Z",
+            "power": 0.85
+        },
+        {
+            "timestamp": "2026-01-15T03:10:00Z",
+            "power": 0.91
+        },
+        {
+            "timestamp": "2026-01-15T03:15:00Z",
+            "power": 0.85
+        },
+        {
+            "timestamp": "2026-01-15T03:16:22.847195725Z",
+            "power": 0.84
+        }
+    ]
+}
