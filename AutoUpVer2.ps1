@@ -1,4 +1,4 @@
-# auto_git_notify.ps1
+﻿# auto_git_notify.ps1
 $ROOT_DIR = "C:\Users\G11407007\Desktop\pop"
 $DISCORD_WEBHOOK = "https://discordapp.com/api/webhooks/1443135453837529098/apii1DGNJeeGhew3GiIatGEBCanLcR2wfMRI-8UyNCRbJeyxaHCOPUqinbNu_lfVnRvk"
 $LOG_DIR = Join-Path $ROOT_DIR "logs"
@@ -11,7 +11,8 @@ $ERR_FILE = Join-Path $LOG_DIR "$TODAY-error.log"
 $COMMIT_MSG = $TODAY
 
 Add-Content $LOG_FILE "[$TODAY $NOW] ================= START Git Batch ================="
-Add-Content $LOG_FILE ""
+Add-Content -Path $LOG_FILE -Value "" -Encoding UTF8
+Add-Content -Path $ERR_FILE -Value "" -Encoding UTF8
 
 Get-ChildItem -Path $ROOT_DIR -Directory | ForEach-Object {
     $dir = $_.FullName
