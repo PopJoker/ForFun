@@ -1,0 +1,1 @@
+pyinstaller --onefile --name="TerminalSlime" terminal_slime.py
