@@ -36,6 +36,7 @@ except ImportError:
     print("請先安裝監聽庫: pip install pynput")
     sys.exit(1)
 
+# 初始化 Console
 console = Console()
 
 # ==========================================
@@ -103,299 +104,589 @@ TIMED_OBSERVATIONS = {
 # ==========================================
 # 🎨 高清細節點陣動畫庫
 # ==========================================
+
 SLIME_ANIMATIONS = {
+
     "idle": [
-        [r"       .-----------.       ",
-         r"    .-'             '-.    ",
-         r"  .'   *             * '.  ",
-         r" /   [●]     ▲     [●]   \ ",
-         r"|                         |",
-         r"|                         |",
-         r" \                       / ",
-         r"  '---------------------'  "],
 
         [r"       .-----------.       ",
+
          r"    .-'             '-.    ",
+
          r"  .'   *             * '.  ",
-         r" /   [●]     ▲     [●]   \ ",
+
+         r" /    ●      ▲      ●    \ ",
+
          r"|                         |",
+
+         r"|                         |",
+
          r" \                       / ",
+
+         r"  '---------------------'  "],
+
+
+
+        [r"       .-----------.       ",
+
+         r"    .-'             '-.    ",
+
+         r"  .'   *             * '.  ",
+
+         r" /    ●      ▲      ●    \ ",
+
+         r"|                         |",
+
+         r" \                       / ",
+
          r"  '---------------------'  ",
+
          r"                           "],
 
-        [r"                           ",
-         r"      .-------------.      ",
-         r"   .-'               '-.   ",
-         r" .'   *             *   '. ",
-         r"/    [●]     ▲     [●]    \ ",
-         r"|                         |",
-         r" \                       / ",
-         r"  '---------------------'  "],
+
 
         [r"                           ",
+
          r"      .-------------.      ",
+
          r"   .-'               '-.   ",
+
          r" .'   *             *   '. ",
-         r"/    [●]     ▲     [●]    \ ",
+
+         r"/     ●      ▲      ●     \ ",
+
          r"|                         |",
+
          r" \                       / ",
+
          r"  '---------------------'  "],
+
+
+
+        [r"                           ",
+
+         r"      .-------------.      ",
+
+         r"   .-'               '-.   ",
+
+         r" .'   *             *   '. ",
+
+         r"/     ●      ▲      ●     \ ",
+
+         r"|                         |",
+
+         r" \                       / ",
+
+         r"  '---------------------'  "],
+
+
 
         [r"       .-----------.       ",
+
          r"    .-'             '-.    ",
+
          r"  .'   *             * '.  ",
-         r" /   [●]     ▲     [●]   \ ",
+
+         r" /    ●      ▲      ●    \ ",
+
          r"|                         |",
+
          r"|                         |",
+
          r" \                       / ",
+
          r"  '---------------------'  "],
+
+
 
         [r"      .-------------.      ",
+
          r"    .-'             '-.    ",
+
          r"  .'   *             * '.  ",
-         r" /   [●]     ▲     [●]   \ ",
+
+         r" /    ●      ▲      ●    \ ",
+
          r"|                         |",
+
          r"|                         |",
+
          r" \                       / ",
+
          r"  '---------------------'  "]
+
     ],
+
     "walk_right": [
+
         [r"       .-----------.       ",
+
          r"    .-'             '-.    ",
+
          r"  .'   *             * '.  ",
-         r" /       [●]   ▲   [●]   \ ",
+
+         r" /        ●    ▲    ●    \ ",
+
          r"|                         |---.",
+
          r"|                          \  >",
+
          r" \                         / ",
+
          r"  '-----------------------'    "],
 
+
+
         [r"         .-----------.     ",
+
          r"      .-'             '-.  ",
+
          r"    .' *             *   '.",
-         r"   /   [●]     ▲     [●]   \ ",
+
+         r"   /    ●      ▲      ●    \ ",
+
          r"  |                         |",
+
          r"  |                         |",
+
          r"   \                       / ",
+
          r"    '---------------------'  "],
 
+
+
         [r"          .-----------.    ",
+
          r"       .-'             '-. ",
+
          r"     .'     *             *",
-         r"    /     [●]     ▲     [●]",
+
+         r"    /      ●      ▲      ● ",
+
          r"   |                       ",
+
          r"   |                       ",
+
          r"    \                     /",
+
          r"     '-------------------' "],
 
+
+
         [r"           .-----------.   ",
+
          r"        .-'             '-.",
+
          r"      .'   *             * ",
-         r"     /   [●]     ▲     [●] ",
+
+         r"     /    ●      ▲      ●  ",
+
          r"    |                      ",
+
          r"    |                      ",
+
          r"     \                    /",
+
          r"      '------------------' "],
 
+
+
         [r"       .-----------.       ",
+
          r"    .-'             '-.    ",
+
          r"  .'   *             * '.  ",
-         r" /   [●]     ▲     [●]   \ ",
+
+         r" /    ●      ▲      ●    \ ",
+
          r"|                         |",
+
          r"|                         |",
+
          r" \                       / ",
+
          r"  '---------------------'  "]
+
     ],
+
     "walk_left": [
+
         [r"       .-----------.       ",
+
          r"    .-'             '-.    ",
+
          r"  .'   *             * '.  ",
-         r" /   [●]   ▲   [●]       \ ",
+
+         r" /    ●    ▲    ●        \ ",
+
          r".---|                         |",
+
          r"<  /                          |",
+
          r"    \                        / ",
+
          r"     '----------------------'  "],
 
+
+
         [r"     .-----------.         ",
+
          r"  .-'             '-.      ",
+
          r".'   *             * '.    ",
-         r"/     [●]     ▲     [●] \  ",
+
+         r"/      ●      ▲      ●  \  ",
+
          r"|                       |  ",
+
          r"|                       |  ",
+
          r" \                     /   ",
+
          r"  '-------------------'    "],
 
+
+
         [r"    .-----------.          ",
+
          r" .-'             '-.       ",
+
          r"' *             *   '.     ",
-         r"   [●]     ▲     [●]   \   ",
+
+         r"    ●      ▲      ●    \   ",
+
          r"                |   ",
+
          r"                |   ",
+
          r"\                     /    ",
+
          r" '-------------------'     "],
 
+
+
         [r"   .-----------.           ",
+
          r" .-'             '-.       ",
+
          r"   *             *  '.     ",
-         r" [●]     ▲     [●]    \    ",
+
+         r"  ●      ▲      ●     \    ",
+
          r"                      |    ",
+
          r"                      |    ",
+
          r"\                    /     ",
+
          r" '------------------'      "],
 
-        [r"       .-----------.       ",
-         r"    .-'             '-.    ",
-         r"  .'   *             * '.  ",
-         r" /   [●]     ▲     [●]   \ ",
-         r"|                         |",
-         r"|                         |",
-         r" \                       / ",
-         r"  '---------------------'  "]
-    ],
-    "happy": [
-        [r"                           ",
-         r"                           ",
-         r"     .---------------.     ",
-         r"  .-'                 '-.  ",
-         r" /   [^]     ▲     [^]   \ ",
-         r"|                         |",
-         r" \                       / ",
-         r"  '---------------------'  "],
+
 
         [r"       .-----------.       ",
+
          r"    .-'             '-.    ",
-         r"  .'   ^             ^ '.  ",
-         r" /   [^]     ▲     [^]   \ ",
+
+         r"  .'   *             * '.  ",
+
+         r" /    ●      ▲      ●    \ ",
+
          r"|                         |",
+
          r"|                         |",
+
          r" \                       / ",
+
+         r"  '---------------------'  "]
+
+    ],
+
+    "happy": [
+
+        [r"                           ",
+
+         r"                           ",
+
+         r"     .---------------.     ",
+
+         r"  .-'                 '-.  ",
+
+         r" /   [^]     ▲     [^]   \ ",
+
+         r"|                         |",
+
+         r" \                       / ",
+
          r"  '---------------------'  "],
+
+
+
+        [r"       .-----------.       ",
+
+         r"    .-'             '-.    ",
+
+         r"  .'   ^             ^ '.  ",
+
+         r" /   [^]     ▲     [^]   \ ",
+
+         r"|                         |",
+
+         r"|                         |",
+
+         r" \                       / ",
+
+         r"  '---------------------'  "],
+
+
 
         [r"         .-------.         ",
+
          r"       .-'       '-.       ",
+
          r"      /             \      ",
+
          r"     |   ^       ^   |     ",
+
          r"     |  [^]  ▲  [^]  |     ",
+
          r"     |               |     ",
+
          r"      \             /      ",
+
          r"       '-----------'       "],
 
+
+
         [r"       .-----------.       ",
+
          r"    .-'             '-.    ",
+
          r"  .'   ^             ^ '.  ",
+
          r" /   [^]     ▲     [^]   \ ",
+
          r"|                         |",
+
          r"|                         |",
+
          r" \                       / ",
+
          r"  '---------------------'  "],
 
+
+
         [r"                           ",
+
          r"                           ",
+
          r"     .---------------.     ",
+
          r"  .-'                 '-.  ",
-         r" /   [●]     ▲     [●]   \ ",
+
+         r" /    ●      ▲      ●    \ ",
+
          r"|                         |",
+
          r" \                       / ",
+
          r"  '---------------------'  "],
 
+
+
         [r"       .-----------.       ",
+
          r"    .-'             '-.    ",
+
          r"  .'   *             * '.  ",
-         r" /   [●]     ▲     [●]   \ ",
+
+         r" /    ●      ▲      ●    \ ",
+
          r"|                         |",
+
          r"|                         |",
+
          r" \                       / ",
+
          r"  '---------------------'  "]
+
     ],
+
     "sleep": [
+
         [r"                           ",
+
          r"       .-----------.       ",
+
          r"    .-'             '-.    ",
+
          r"  .'                 '.    ",
+
          r" /   [=]     ▲     [=]   \ ",
+
          r"|                         |",
+
          r" \                       / ",
+
          r"  '---------------------'  "],
 
+
+
         [r"                           ",
+
          r"      .-------------.      ",
+
          r"   .-'               '-.   ",
+
          r" .'                     '. ",
+
          r"/    [=]     ▲     [=]    \ ",
+
          r"|                         |",
+
          r" \                       / ",
+
          r"  '---------------------'  "],
 
+
+
         [r"                           ",
+
          r"      .-------------.      ",
+
          r"   .-'               '-.   ",
+
          r" .'                     '. ",
+
          r"/    [=]     ▲     [=]    \ ",
+
          r"|                         |",
+
          r" \                       / ",
+
          r"  '---------------------'  "],
 
+
+
         [r"                           ",
+
          r"       .-----------.       ",
+
          r"    .-'             '-.    ",
+
          r"  .'                 '.    ",
+
          r" /   [=]     ▲     [=]   \ ",
+
          r"|                         |",
+
          r" \                       / ",
+
          r"  '---------------------'  "]
+
     ],
+
     "bored": [
-        [r"       .-----------.       ",
-         r"    .-'             '-.    ",
-         r"  .'   *             * '.  ",
-         r" /   [●]     ▲     [●]   \ ",
-         r"|                         |",
-         r"|                         |",
-         r" \                       / ",
-         r"  '---------------------'  "],
 
         [r"       .-----------.       ",
+
          r"    .-'             '-.    ",
+
          r"  .'   *             * '.  ",
-         r" /     [●]   ▲     [●]   \ ",
+
+         r" /    ●      ▲      ●    \ ",
+
          r"|                         |",
+
          r"|                         |",
+
          r" \                       / ",
+
          r"  '---------------------'  "],
 
-        [r"       .-----------.       ",
-         r"    .-'             '-.    ",
-         r"  .'   *             * '.  ",
-         r" /       [●] .   [●]     \ ",
-         r"|                         |",
-         r"|                         |",
-         r" \                       / ",
-         r"  '---------------------'  "],
+
 
         [r"       .-----------.       ",
+
          r"    .-'             '-.    ",
+
          r"  .'   *             * '.  ",
-         r" /   [●]     . [●]       \ ",
+
+         r" /      ●    ▲      ●    \ ",
+
          r"|                         |",
+
          r"|                         |",
+
          r" \                       / ",
+
          r"  '---------------------'  "],
 
+
+
         [r"       .-----------.       ",
+
          r"    .-'             '-.    ",
+
          r"  .'   *             * '.  ",
-         r" /   [●]   . [●]         \ ",
+
+         r" /        ●  .    ●      \ ",
+
          r"|                         |",
+
          r"|                         |",
+
          r" \                       / ",
+
+         r"  '---------------------'  "],
+
+
+
+        [r"       .-----------.       ",
+
+         r"    .-'             '-.    ",
+
+         r"  .'   *             * '.  ",
+
+         r" /    ●      .  ●        \ ",
+
+         r"|                         |",
+
+         r"|                         |",
+
+         r" \                       / ",
+
+         r"  '---------------------'  "],
+
+
+
+        [r"       .-----------.       ",
+
+         r"    .-'             '-.    ",
+
+         r"  .'   *             * '.  ",
+
+         r" /    ●    .  ●          \ ",
+
+         r"|                         |",
+
+         r"|                         |",
+
+         r" \                       / ",
+
          r"  '---------------------'  "]
+
     ]
+
 }
 
+    
+
+# 史萊姆本體的資料結構（寬度約 28-30 字元，高度 8 字元）
 pet = {
-    "x": 6,
+    "x": 2,                 # 會在 update_companion 中根據視窗寬度動態調整
     "y_offset": 0,
     "direction": 1,
-    "status_text": "巨型高精細史萊姆載入成功！在終端裡沉甸甸地待命中。",
+    "status_text": "無限制動態大史萊姆載入成功！正在探索你的整個終端機...",
     "ticks_in_state": 0,
     "state_duration": 80, 
     "accumulated_activity": 0,
@@ -413,145 +704,28 @@ frame_index = 0
 # 🪟 Windows 視窗拖動輔助函式
 # ==========================================
 def shift_terminal_window(pixels_x):
-    """將目前的終端機視窗在畫面上水平移動指定的像素量"""
     if GetConsoleWindow is None:
         return
-    
     hwnd = GetConsoleWindow()
     if hwnd:
         rect = RECT()
         if GetWindowRect(hwnd, ctypes.byref(rect)):
             width = rect.right - rect.left
             height = rect.bottom - rect.top
-            # 新的桌面座標
             new_left = rect.left + pixels_x
             new_top = rect.top
-            # 移動視窗 (最後一個參數 True 代表重繪視窗)
             MoveWindow(hwnd, new_left, new_top, width, height, True)
 
 # ==========================================
-# 🧠 狀態機
+# 🧠 狀態與邊界機（全螢幕適配版）
 # ==========================================
-# def update_companion():
-#     global current_state, frame_index, pet
-    
-#     pet["accumulated_activity"] += sensor.activity_score
-#     sensor.activity_score = 0
-#     pet["ticks_in_state"] += 1
-    
-#     frames = SLIME_ANIMATIONS[current_state]
-#     frame_index = (frame_index + 1) % len(frames)
-    
-#     # --- 平滑物理位移與邊界撞擊拖動視窗處理 ---
-#     # 每個字元在畫布大約等同 8~14 像素，這裡設定每次推動視窗 12 像素，帶來的肉感最剛好
-#     WINDOW_SHIFT_PIXELS = 12 
-
-#     if current_state == "walk_right":
-#         if pet["x"] >= 16:
-#             pet["x"] = 16
-#             # 碰右壁！不增加內部 X 座標，改為把整個終端機視窗往右拖
-#             shift_terminal_window(WINDOW_SHIFT_PIXELS)
-#             pet["status_text"] = "（咚！大史萊姆用肥肉抵住邊緣，把整個終端機往右邊推過去了！）"
-#         else:
-#             pet["x"] += 0.3
-
-#     elif current_state == "walk_left":
-#         if pet["x"] <= 0:
-#             pet["x"] = 0
-#             # 碰左壁！不減少內部 X 座標，改為把整個終端機視窗往左拖
-#             shift_terminal_window(-WINDOW_SHIFT_PIXELS)
-#             pet["status_text"] = "（哼嗯——！大史萊姆用力抓著左側邊框，把視窗往左邊拽！）"
-#         else:
-#             pet["x"] -= 0.3
-
-#     elif current_state == "happy":
-#         jump_heights = [0, -1, -3, -3, -1, 0]
-#         if frame_index < len(jump_heights):
-#             pet["y_offset"] = jump_heights[frame_index]
-#         else:
-#             pet["y_offset"] = 0
-#     else:
-#         pet["y_offset"] = 0
-
-#     # --- 健康護眼通知 ---
-#     now = time.time()
-#     if now - pet["last_reminder_time"] > 2700: 
-#         pet["last_reminder_time"] = now
-#         current_state = "happy"
-#         pet["status_text"] = "主人，大史萊姆提醒您：動一動、喝杯水，眼睛需要休息一下囉！"
-#         pet["state_duration"] = 60
-        
-#         try:
-#             if os.name == 'nt':
-#                 cmd = "PowerShell -Command \"Add-Type -AssemblyName PresentationFramework; [System.Windows.MessageBox]::Show(' (○´∀`)b \n\n主人，工作辛苦了！\n大史萊姆提醒您記得喝口水、動一動。', '史萊姆護眼小助手')\""
-#                 os.system(f"start /B {cmd}")
-#             else:
-#                 if sys.platform == 'darwin':
-#                     os.system("osascript -e 'display notification \"(○´∀`)b  記得喝口水、動一動喔！\" with title \"史萊姆護眼小助手 \"'")
-#                 else:
-#                     os.system("notify-send '史萊姆護眼小助手 ' '(○´∀`)b 記得喝口水、動一動喔！'")
-#         except Exception:
-#             pass
-#         return
-
-#     # --- 決策核心 ---
-#     if pet["ticks_in_state"] >= pet["state_duration"]:
-#         activity_result = pet["accumulated_activity"]
-#         pet["accumulated_activity"] = 0
-#         pet["ticks_in_state"] = 0
-        
-#         period = get_time_period()
-#         dialogues = TIMED_OBSERVATIONS[period]
-        
-#         # 主人活躍
-#         if activity_result > 15:
-#             current_state = "happy"
-#             pet["state_duration"] = 15
-#             pet["status_text"] = random.choice(dialogues["watching"])
-#             pet["has_cleared_terminal"] = False 
-#             frame_index = 0
-#             return
-            
-#         # 主人閒置
-#         if activity_result == 0:
-#             if current_state == "bored" and not pet["has_cleared_terminal"]:
-#                 pet["trigger_clear_cmd"] = True
-#                 pet["has_cleared_terminal"] = True
-#                 current_state = "sleep"
-#                 pet["status_text"] = "[SYSTEM] 檢測到主人閒置，巨型史萊姆用肥胖的身體壓住並清理了終端。"
-#                 pet["state_duration"] = 200
-#                 return
-
-#             if period == "midnight":
-#                 current_state = "sleep"
-#                 pet["status_text"] = random.choice(dialogues["sleep"])
-#                 pet["state_duration"] = random.randint(150, 250)
-#             else:
-#                 if current_state in ["idle", "walk_right", "walk_left"]:
-#                     current_state = "bored"
-#                     pet["status_text"] = random.choice(dialogues["bored"])
-#                     pet["state_duration"] = random.randint(100, 150)
-#                 else:
-#                     current_state = "sleep"
-#                     pet["status_text"] = random.choice(dialogues["sleep"])
-#                     pet["state_duration"] = random.randint(100, 150)
-            
-#         else:
-#             if current_state == "sleep":
-#                 current_state = "idle"
-#                 pet["status_text"] = "大史萊姆抖了抖身上的肉，醒過來繼續陪著主人。"
-#             else:
-#                 if period in ["morning", "daytime"]:
-#                     current_state = random.choice(["idle", "walk_right", "walk_left", "idle"])
-#                 else:
-#                     current_state = random.choice(["idle", "bored", "idle"])
-                    
-#                 pet["status_text"] = random.choice(dialogues["watching"])
-                
-#             pet["state_duration"] = random.randint(80, 120)
-
 def update_companion():
     global current_state, frame_index, pet
+    
+    # 獲取當前真實的終端機寬度
+    term_width, _ = console.size
+    # 扣掉 Panel 邊框(大約4個字元)與史萊姆本身點陣寬度(最大約30個字元)，得到最大可移動 X 軸界線
+    max_x = max(1, term_width - 34)
     
     pet["accumulated_activity"] += sensor.activity_score
     sensor.activity_score = 0
@@ -560,33 +734,31 @@ def update_companion():
     frames = SLIME_ANIMATIONS[current_state]
     frame_index = (frame_index + 1) % len(frames)
     
-    # 每個字元在畫布大約等同 8~14 像素，這裡設定每次推動視窗 12 像素
     WINDOW_SHIFT_PIXELS = 12 
 
+    # --- 走動與動態邊界撞擊處理 ---
     if current_state == "walk_right":
-        if pet["x"] >= 16:
-            pet["x"] = 16
+        if pet["x"] >= max_x:
+            pet["x"] = max_x
             shift_terminal_window(WINDOW_SHIFT_PIXELS)
-            pet["status_text"] = "（咚！大史萊姆用肥肉抵住邊緣，把整個終端機往右邊推過去了！）"
-            # 【優化】撞牆時有 30% 機率提早結束這個狀態，讓牠不會卡太久
+            pet["status_text"] = f"（咚！大史萊姆用肥肉抵住右側邊框！把整個終端機往右推！）"
             if random.random() < 0.3:
                 pet["ticks_in_state"] = pet["state_duration"]
         else:
-            pet["x"] += 0.4  # 【優化】稍微加快一點點步伐 (原為 0.3)
+            pet["x"] += 0.6  # 畫布變大，稍微加快一點點步伐
 
     elif current_state == "walk_left":
         if pet["x"] <= 0:
             pet["x"] = 0
             shift_terminal_window(-WINDOW_SHIFT_PIXELS)
             pet["status_text"] = "（哼嗯——！大史萊姆用力抓著左側邊框，把視窗往左邊拽！）"
-            # 【優化】撞牆時有 30% 機率提早結束
             if random.random() < 0.3:
                 pet["ticks_in_state"] = pet["state_duration"]
         else:
-            pet["x"] -= 0.4  # 【優化】稍微加快一點點步伐 (原為 0.3)
+            pet["x"] -= 0.6
 
     elif current_state == "happy":
-        jump_heights = [0, -1, -3, -3, -1, 0]
+        jump_heights = [0, -1, -2, -2, -1, 0]
         if frame_index < len(jump_heights):
             pet["y_offset"] = jump_heights[frame_index]
         else:
@@ -594,7 +766,7 @@ def update_companion():
     else:
         pet["y_offset"] = 0
 
-    # --- 健康護眼通知 (保持原樣) ---
+    # --- 健康護眼通知 ---
     now = time.time()
     if now - pet["last_reminder_time"] > 2700: 
         pet["last_reminder_time"] = now
@@ -615,7 +787,7 @@ def update_companion():
             pass
         return
 
-    # --- 決策核心 (活潑化改造) ---
+    # --- 決策核心 ---
     if pet["ticks_in_state"] >= pet["state_duration"]:
         activity_result = pet["accumulated_activity"]
         pet["accumulated_activity"] = 0
@@ -624,7 +796,7 @@ def update_companion():
         period = get_time_period()
         dialogues = TIMED_OBSERVATIONS[period]
         
-        # 主人活躍 (打字或動滑鼠)
+        # 主人活躍
         if activity_result > 15:
             current_state = "happy"
             pet["state_duration"] = 15
@@ -651,13 +823,13 @@ def update_companion():
                 if current_state in ["idle", "walk_right", "walk_left"]:
                     current_state = "bored"
                     pet["status_text"] = random.choice(dialogues["bored"])
-                    pet["state_duration"] = random.randint(60, 100) # 【優化】發呆時間縮短 (原 100~150)
+                    pet["state_duration"] = random.randint(60, 100)
                 else:
                     current_state = "sleep"
                     pet["status_text"] = random.choice(dialogues["sleep"])
                     pet["state_duration"] = random.randint(60, 100)
             
-        # 主人正常工作狀態下 (大幅提升史萊姆的好動度)
+        # 主人工作（好動）
         else:
             if current_state == "sleep":
                 current_state = "idle"
@@ -665,46 +837,60 @@ def update_companion():
                 pet["state_duration"] = random.randint(30, 60)
             else:
                 if period in ["morning", "daytime"]:
-                    # 【優化】將走動機率大幅提升！walk_right 與 walk_left 各佔 37.5%，發呆只剩 25%
                     current_state = random.choice(["walk_right", "walk_left", "walk_right", "walk_left", "idle"])
-                else: # 傍晚
+                else: 
                     current_state = random.choice(["idle", "walk_right", "walk_left", "bored"])
                     
                 pet["status_text"] = random.choice(dialogues["watching"])
                 
-            # 【優化】單次動作持續時間大幅縮短 (從 8-12 秒縮短到 2-5 秒)，這樣看起來會非常靈活！
             pet["state_duration"] = random.randint(20, 50)
+
 # ==========================================
-# 📺 畫布渲染引擎 (升級相容大型畫布)
+# 📺 動態畫布渲染引擎 (完美適配視窗大小)
 # ==========================================
-def render_canvas():
-    canvas = [[" " for _ in range(50)] for _ in range(12)]
+def render_canvas(width, height):
+    # 建立動態大小的 Canvas 二維陣列
+    canvas = [[" " for _ in range(width)] for _ in range(height)]
+    
     frames = SLIME_ANIMATIONS.get(current_state, SLIME_ANIMATIONS["idle"])
     actual_frame = frames[frame_index % len(frames)]
     
-    base_y = 4 
+    # 史萊姆垂直居中靠下
+    base_y = max(0, height - 9)
     start_x = int(pet["x"])
-    start_y = base_y + pet["y_offset"]
+    start_y = max(0, base_y + pet["y_offset"])
     
+    # 繪製史萊姆本體
     for row_idx, line in enumerate(actual_frame):
         for col_idx, char in enumerate(line):
             if char == " " or char == "\xa0": 
                 continue
             target_x = start_x + col_idx
             target_y = start_y + row_idx
-            if 0 <= target_x < 50 and 0 <= target_y < 12:
+            if 0 <= target_x < width and 0 <= target_y < height:
                 canvas[target_y][target_x] = char
 
+    # 繪製 Zzz 睡覺特效
     if current_state == "sleep":
         z_cycle = (frame_index // 2) % 3
         z_char = "z" if z_cycle == 0 else ("Z" if z_cycle == 1 else "💤")
         zx, zy = start_x + 22 + z_cycle, start_y - z_cycle
-        if 0 <= zx < 50 and 0 <= zy < 12:
+        if 0 <= zx < width and 0 <= zy < height:
             canvas[zy][zx] = z_char
 
     return "\n".join("".join(row) for row in canvas)
 
 def build_pet_world():
+    # 1. 動態獲取當前終端機的大小
+    term_width, term_height = console.size
+    
+    # 2. 計算 Panel 內部的可用寬高 (扣掉邊框與底部狀態欄)
+    panel_width = max(40, term_width - 2)
+    panel_height = max(12, term_height - 1)  # 利用幾乎所有垂直空間
+    
+    canvas_w = panel_width - 4
+    canvas_h = panel_height - 5  # 留空間給分界線和文字
+    
     period = get_time_period()
     color_map = {
         "idle": "bright_cyan" if period != "midnight" else "cyan",
@@ -715,21 +901,26 @@ def build_pet_world():
         "bored": "bright_yellow"
     }
     theme_color = color_map.get(current_state, "bright_cyan")
-    canvas_str = render_canvas()
+    
+    # 生成對應此大小的畫布
+    canvas_str = render_canvas(canvas_w, canvas_h)
     
     display_text = Text()
     display_text.append(f"{canvas_str}\n", style=f"bold {theme_color}")
-    display_text.append(" ───────────────────────────────────────────\n", style="bright_black")
+    
+    # 動態畫出跟視窗同寬的分隔線
+    divider = "─" * (canvas_w)
+    display_text.append(f"{divider}\n", style="bright_black")
     display_text.append(f"   {pet['status_text']}", style="italic white")
 
     companion_panel = Panel(
         display_text,
-        title="Slime Companion ",
+        title="Slime Companion (Dynamic) ",
         title_align="center",
         border_style="bright_black",
         box=rich.box.ROUNDED,
-        width=54,  
-        height=16  
+        width=panel_width,  
+        height=panel_height  
     )
     return companion_panel
 
@@ -738,6 +929,7 @@ def build_pet_world():
 # ==========================================
 if __name__ == "__main__":
     try:
+        # 使用 screen=True 啟用全螢幕替代緩衝區
         while True:
             with Live(build_pet_world(), refresh_per_second=10, screen=True) as live:
                 while True:
