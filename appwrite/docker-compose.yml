@@ -1,0 +1,252 @@
+x-logging: &default-logging
+  logging:
+    driver: json-file
+    options:
+      max-file: "5"
+      max-size: 10m
+
+services:
+  # 1. 網關路由器
+  traefik:
+    image: traefik:3.6
+    <<: *default-logging
+    container_name: appwrite-traefik
+    command:
+    - --providers.file.directory=/storage/config
+    - --providers.file.watch=true
+    - --providers.docker=true
+    - --providers.docker.exposedByDefault=false
+    - --providers.docker.constraints=Label(`traefik.constraint-label-stack`,`appwrite`)
+    - --entrypoints.appwrite_web.address=:80
+    - --entrypoints.appwrite_websecure.address=:443
+    ports:
+    - ${_APP_HTTP_PORT:-80}:80
+    - ${_APP_HTTPS_PORT:-443}:443
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - appwrite-config:/storage/config:ro
+    - appwrite-certificates:/storage/certificates:ro
+    depends_on:
+    - appwrite
+    networks:
+    - gateway
+    - appwrite
+
+  # 2. Appwrite 主程式
+  appwrite:
+    container_name: appwrite
+    <<: *default-logging
+    image: ${_APP_IMAGE:-appwrite/appwrite}:${_APP_VERSION:-latest}
+    # 暫時放寬 healthcheck，避免因為資料庫慢而導致 Traefik 拒絕轉發流量
+    healthcheck:
+      test: ["CMD", "doctor"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    networks:
+    - appwrite
+    labels:
+    - traefik.enable=true
+    - traefik.constraint-label-stack=appwrite
+    - traefik.docker.network=appwrite
+    - traefik.http.services.appwrite_api.loadbalancer.server.port=80
+    - traefik.http.routers.appwrite_api_http.entrypoints=appwrite_web
+    - traefik.http.routers.appwrite_api_http.rule=PathPrefix(`/v1`) || PathPrefix(`/`)
+    - traefik.http.routers.appwrite_api_http.service=appwrite_api
+    - traefik.http.routers.appwrite_api_http.priority=1000
+    - traefik.http.routers.appwrite_api_https.entrypoints=appwrite_websecure
+    - traefik.http.routers.appwrite_api_https.rule=PathPrefix(`/v1`) || PathPrefix(`/`)
+    - traefik.http.routers.appwrite_api_https.service=appwrite_api
+    - traefik.http.routers.appwrite_api_https.priority=1000
+    - traefik.http.routers.appwrite_api_https.tls=true
+    volumes:
+    - appwrite-uploads:/storage/uploads:rw
+    - appwrite-cache:/storage/cache:rw
+    - appwrite-config:/storage/config:rw
+    - appwrite-certificates:/storage/certificates:rw
+    depends_on:
+      redis:
+        condition: service_started
+      mongodb:
+        condition: service_healthy
+    # 引入外部的 .env 檔案，確保環境變數能灌進容器
+    env_file:
+      - .env
+    environment:
+    # 直接在這邊把核心連線對齊 docker-compose 內部的服務名稱，防呆最安全
+    - _APP_DB_HOST=mongodb
+    - _APP_DB_PORT=27017
+    - _APP_REDIS_HOST=redis
+    - _APP_REDIS_PORT=6379
+    # 核心功能改回啟用
+    - _APP_OPTIONS_FUNCTIONS=enabled
+    - _APP_OPTIONS_STORAGE=enabled
+    - _APP_OPTIONS_DATABASES=enabled
+    - _APP_OPTIONS_GRAPHQL=enabled
+
+  # 3. 網頁後台管理介面
+  appwrite-console:
+    <<: *default-logging
+    container_name: appwrite-console
+    image: appwrite/console:8.7.5
+    restart: unless-stopped
+    networks:
+    - appwrite
+    labels:
+    - traefik.enable=true
+    - traefik.constraint-label-stack=appwrite
+    - traefik.docker.network=appwrite
+    - traefik.http.services.appwrite_console.loadbalancer.server.port=80
+    - traefik.http.routers.appwrite_console_http.entrypoints=appwrite_web
+    - traefik.http.routers.appwrite_console_http.rule=PathPrefix(`/console`)
+    - traefik.http.routers.appwrite_console_http.service=appwrite_console
+    - traefik.http.routers.appwrite_console_http.priority=2000
+    - traefik.http.routers.appwrite_console_https.entrypoints=appwrite_websecure
+    - traefik.http.routers.appwrite_console_https.rule=PathPrefix(`/console`)
+    - traefik.http.routers.appwrite_console_https.service=appwrite_console
+    - traefik.http.routers.appwrite_console_https.priority=2000
+    - traefik.http.routers.appwrite_console_https.tls=true
+
+  # 4. 背景 Worker - 郵件
+  appwrite-worker-mails:
+    entrypoint: worker-mails
+    <<: *default-logging
+    container_name: appwrite-worker-mails
+    image: ${_APP_IMAGE:-appwrite/appwrite}:${_APP_VERSION:-latest}
+    networks:
+    - appwrite
+    depends_on:
+      redis:
+        condition: service_started
+      mongodb:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+    - _APP_DB_HOST=mongodb
+    - _APP_REDIS_HOST=redis
+
+  # 5. 背景 Worker - 刪除清理
+  appwrite-worker-deletes:
+    entrypoint: worker-deletes
+    <<: *default-logging
+    container_name: appwrite-worker-deletes
+    image: ${_APP_IMAGE:-appwrite/appwrite}:${_APP_VERSION:-latest}
+    networks:
+    - appwrite
+    depends_on:
+      redis:
+        condition: service_started
+      mongodb:
+        condition: service_healthy
+    volumes:
+    - appwrite-uploads:/storage/uploads:rw
+    - appwrite-cache:/storage/cache:rw
+    env_file:
+      - .env
+    environment:
+    - _APP_DB_HOST=mongodb
+    - _APP_REDIS_HOST=redis
+
+  # 6. 定時排程任務
+  appwrite-task-interval:
+    entrypoint: interval
+    restart: on-failure:3
+    <<: *default-logging
+    container_name: appwrite-task-interval
+    image: ${_APP_IMAGE:-appwrite/appwrite}:${_APP_VERSION:-latest}
+    networks:
+    - appwrite
+    depends_on:
+      redis:
+        condition: service_started
+      mongodb:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+    - _APP_DB_HOST=mongodb
+    - _APP_REDIS_HOST=redis
+
+  # 7. MongoDB 資料庫
+  mongodb:
+    image: mongo:8.2.5
+    container_name: appwrite-mongodb
+    <<: *default-logging
+    restart: on-failure:3
+    networks:
+    - appwrite
+    volumes:
+    - appwrite-mongodb:/data/db
+    - appwrite-mongodb-keyfile:/data/keyfile
+    - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    - ./mongo-entrypoint.sh:/mongo-entrypoint.sh:ro
+    env_file:
+      - .env
+    environment:
+    - MONGO_INITDB_ROOT_USERNAME=root
+    - MONGO_INITDB_ROOT_PASSWORD=${_APP_DB_ROOT_PASS}
+    - MONGO_INITDB_DATABASE=${_APP_DB_SCHEMA}
+    - MONGO_INITDB_USERNAME=${_APP_DB_USER}
+    - MONGO_INITDB_PASSWORD=${_APP_DB_PASS}
+    entrypoint:
+    - /bin/bash
+    - /mongo-entrypoint.sh
+    healthcheck:
+      test: |
+        bash -c "
+          mongosh -u root -p ${_APP_DB_ROOT_PASS} --authenticationDatabase admin --quiet --eval \"
+            try {
+              const hello = db.adminCommand({hello: 1});
+              if (hello.isWritablePrimary) {
+                quit(0);
+              }
+            } catch (e) {}
+            try {
+              rs.initiate({_id: 'rs0', members: [{_id: 0, host: 'appwrite-mongodb:27017'}]});
+            } catch (e) {}
+            quit(1);
+          \" 2>/dev/null
+        "
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+
+  # 8. Redis 快取
+  redis:
+    image: redis:7.4.7-alpine
+    <<: *default-logging
+    container_name: appwrite-redis
+    command:
+    - redis-server
+    - --maxmemory
+    - 256mb
+    - --maxmemory-policy
+    - allkeys-lru
+    - --maxmemory-samples
+    - "5"
+    networks:
+    - appwrite
+    volumes:
+    - appwrite-redis:/data:rw
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+networks:
+  gateway:
+    name: gateway
+  appwrite:
+    name: appwrite
+
+volumes:
+  appwrite-mongodb: ~
+  appwrite-mongodb-keyfile: ~
+  appwrite-redis: ~
+  appwrite-cache: ~
+  appwrite-uploads: ~
+  appwrite-certificates: ~
+  appwrite-config: ~

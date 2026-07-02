@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appwrite 綜合驗證測試</title>
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@14.0.0"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-google {
+            background-color: #4285F4;
+            margin-top: 10px;
+        }
+
+        .btn-google:hover {
+            background-color: #357AE8;
+        }
+
+        .btn-secondary {
+            background-color: #6C757D;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5A6268;
+        }
+
+        .btn-danger {
+            background-color: #DC3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #bd2130;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            border-bottom: 1px solid #ccc;
+            line-height: 0.1em;
+        }
+
+        .divider span {
+            background: #fff;
+            padding: 0 10px;
+            color: #666;
+        }
+
+        #log {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Appwrite 綜合驗證攔截測試</h2>
+
+    <!-- 傳統帳密區塊 -->
+    <div class="form-group">
+        <label for="name">姓名（僅註冊需要）：</label>
+        <input type="text" id="name" value="王小明">
+    </div>
+    <div class="form-group">
+        <label for="email">Email：</label>
+        <input type="email" id="email" value="testuser@example.com">
+    </div>
+    <div class="form-group">
+        <label for="password">密碼：</label>
+        <input type="password" id="password" value="password123">
+    </div>
+
+    <button onclick="handleStrictRegister()">1. 傳統註冊（自動發驗證信+攔截）</button>
+    <button onclick="handleStrictLogin()">2. 傳統登入（未驗證會被踢掉）</button>
+
+    <!-- 第三方登入區塊 -->
+    <div class="divider"><span>或者</span></div>
+
+    <div class="form-group">
+        <button class="btn-google" onclick="handleGoogleLogin()">使用 Google 帳號登入與註冊</button>
+    </div>
+
+    <div class="divider"><span>管理工具</span></div>
+
+    <!-- 通用管理按鈕 -->
+    <button onclick="checkUser()" class="btn-secondary">檢查目前狀態</button>
+    <button onclick="handleLogout()" class="btn-danger">手動登出</button>
+
+    <h3>執行日誌：</h3>
+    <div id="log">等待操作...</div>
+
+    <script>
+        // ==================== 1. 初始化 Appwrite ====================
+        const client = new Appwrite.Client();
+        client
+            .setEndpoint('http://localhost/v1')
+            .setProject('6a45bf810037cd838d3b');
+
+        const account = new Appwrite.Account(client);
+
+        function log(message, obj = null) {
+            const logDiv = document.getElementById('log');
+            if (obj) {
+                logDiv.innerText = message + '\n' + JSON.stringify(obj, null, 2);
+            } else {
+                logDiv.innerText = message;
+            }
+        }
+
+        // ==================== 2. 傳統帳密註冊流程 ====================
+        function handleStrictRegister() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            log("步驟 1 開始註冊帳號...");
+
+            account.create('unique()', email, password, name)
+                .then(response => {
+                    log("步驟 2 帳號建立成功！正在背後自動登入以獲取發信權限...");
+                    return account.createEmailPasswordSession(email, password);
+                })
+                .then(session => {
+                    log("步驟 3 背後登入成功！正在觸發發送驗證信...");
+                    return account.createVerification('http://127.0.0.1:5500/index.html');
+                })
+                .then(verification => {
+                    log("步驟 4 驗證信已成功發送！為了安全，現在將您強制登出...");
+                    return account.deleteSession('current');
+                })
+                .then(() => {
+                    log("註冊且觸發驗證成功！\n\n系統已向您的信箱發送驗證郵件。\n請先前往信箱點擊驗證連結，否則等一下「2. 登入」將會失敗。");
+                })
+                .catch(error => {
+                    log("註冊流程失敗。錯誤訊息：\n" + error.message);
+                    account.deleteSession('current').catch(() => { });
+                });
+        }
+
+        // ==================== 3. 傳統帳密登入流程 ====================
+        function handleStrictLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            log("正在嘗試傳統登入...");
+
+            account.createEmailPasswordSession(email, password)
+                .then(session => {
+                    log("登入成功，正在檢查您的 Email 驗證狀態...");
+                    return account.get();
+                })
+                .then(user => {
+                    if (user.emailVerification === false) {
+                        log("傳統登入被攔截。您雖然密碼正確，但尚未通過 Email 驗證！正在強制將您踢出...");
+                        return account.deleteSession('current').then(() => {
+                            log("拒絕登入。請先去信箱點擊驗證連結，驗證通過後才能登入！");
+                        });
+                    } else {
+                        log("傳統登入成功。歡迎進系統！您已通過 Email 驗證，用戶資料：", user);
+                    }
+                })
+                .catch(error => {
+                    log("傳統登入失敗。錯誤訊息：\n" + error.message);
+                });
+        }
+
+        // ==================== 4. Google OAuth2 登入流程 ====================
+        function handleGoogleLogin() {
+            log("正在跳轉至 Google 驗證頁面...");
+            account.createOAuth2Session(
+                'google',
+                'http://localhost:5500/index.html', // 改為 localhost
+                'http://localhost:5500/index.html'  // 改為 localhost
+            );
+        }
+
+        // ==================== 5. 檢查目前狀態（兼顧兩種登入後的狀態） ====================
+        function checkUser() {
+            log("正在獲取當前用戶資料...");
+            account.get()
+                .then(user => {
+                    if (user.emailVerification === false) {
+                        log("登入狀態檢查：被系統攔截。您的 Email 狀態未經驗證，強制將您踢出...");
+                        return account.deleteSession('current').then(() => {
+                            log("拒絕登入。");
+                        });
+                    } else {
+                        log("登入狀態檢查：已放行。驗證成功，用戶資料如下：", user);
+                    }
+                })
+                .catch(error => {
+                    log("目前狀態：未登入。尚未登入或已被系統攔截踢出。");
+                });
+        }
+
+        // ==================== 6. 手動登出 ====================
+        function handleLogout() {
+            log("正在登出...");
+            account.deleteSession('current')
+                .then(() => { log("已成功登出。"); })
+                .catch(error => { log("登出失敗：" + error.message); });
+        }
+
+        // ==================== 7. 自動捕捉網址參數（信箱驗證與回調檢查） ====================
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const userId = urlParams.get('userId');
+            const secret = urlParams.get('secret');
+
+            if (userId && secret) {
+                // 情境 A：從傳統信箱驗證連結點擊跳轉回來
+                log("偵測到傳統驗證認證碼，正在向後端開通帳號中...");
+                account.updateVerification(userId, secret)
+                    .then(response => {
+                        log("驗證開通成功。您的信箱已成功通過驗證！現在可以使用上方表單輸入帳密並點擊「2. 傳統登入」進系統了。");
+                        window.history.replaceState({}, document.title, window.location.pathname);
+                    })
+                    .catch(error => {
+                        log("驗證開通失敗。連結可能已過期或無效：" + error.message);
+                    });
+            } else {
+                // 情境 B：一般頁面載入，或從 Google OAuth2 授權成功後跳轉回來
+                checkUser();
+            }
+        };
+    </script>
+</body>
+
+</html>
