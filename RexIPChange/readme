@@ -1,0 +1,5 @@
+正常情況用RunPs1.bat
+如未來win11 PowerShell改版 先用.bat頂替
+ps1 GUI和終端互相依靠存活 不能關閉終端 但可以關閉黑盒子
+GUI 如果沒出現 在終端按一下Enter Windows老毛病處理不了
+不理解歡迎直接詢問杜品延
