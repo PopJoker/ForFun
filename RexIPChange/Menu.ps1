@@ -16,7 +16,8 @@ $adapter = Get-NetAdapter -ErrorAction SilentlyContinue | Where-Object {
     $_.HardwareInterface -eq $true -and 
     $_.Name -notlike '*vEthernet*' -and 
     $_.Name -notlike '*Virtual*' -and 
-    $_.Name -notlike '*Tailscale*' 
+    $_.Name -notlike '*Tailscale*' -and 
+    $_.Name -notlike '*Wi-Fi*' 
 } | Select-Object -First 1
 
 if (-not $adapter) {
